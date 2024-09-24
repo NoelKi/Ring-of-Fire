@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Game } from '../models/game.model';
+import { Game } from './../../models/game';
 
 
 @Component({
@@ -12,13 +12,30 @@ import { Game } from '../models/game.model';
 })
 export class GameComponent {
   pickCardAnimation = false;
-  game: Game;
+  game!: Game;
+  currCard: string | undefined = "";
+
+  ngOnInit(): void {
+    this.newGame();
+  }
 
   takeCard(){
-    this.pickCardAnimation = true;
+    if(!this.pickCardAnimation) {
+
+      this.currCard = this.game.stack.pop();
+      this.pickCardAnimation = true;
+      
+      setTimeout(() => {
+        this.pickCardAnimation = false;
+        if (this.currCard) {
+          this.game.playedCards.push(this.currCard);
+        }  
+      }, 1250)
+    }
   }
 
   newGame() {
     this.game = new Game();
+    console.log(this.game);    
   }
 }
