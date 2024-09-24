@@ -12,4 +12,19 @@ img {
     max-height: 100vw;
 }
 
+.start-label-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    @include dFlex();
+    >img {
+        margin-top: 400px;
+        max-width: 40vw;
+        height: auto;
 
+        &:hover {
+            filter: brightness(1.2);
+            cursor: pointer;
+        }
+    }
+}
